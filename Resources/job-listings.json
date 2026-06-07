@@ -1,0 +1,92 @@
+[
+  {
+    "jobTitle": "Frontend Engineer",
+    "jobDetails": {      
+      "description": "Help us build the next generation of payment interfaces. Experience with React and TypeScript is a must.",
+      "location": "Remote / San Francisco, CA",
+      "salaryRange": "$140K-$180K"
+    },
+    "companyName": "Stripe",
+    "companyDetails": {      
+      "logo": "https://github.com/stripe.png",
+      "description": "Financial infrastructure platform for the internet.",
+      "website": "https://stripe.com",
+      "location": "San Francisco, CA",
+      "id": "comp-stripe-001"
+    },
+    "postedAt": "2026-06-01T10:00:00.000Z",
+    "id": "1"
+  },
+  {
+    "jobTitle": "Full Stack Developer",
+    "jobDetails": {      
+      "description": "Join our framework team to improve Next.js and build scalable edge infrastructure.",
+      "location": "Remote",
+      "salaryRange": "$130K-$170K"
+    },
+    "companyName": "Vercel",
+    "company": {      
+      "logo": "https://github.com/vercel.png",
+      "description": "Vercel is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.",
+      "website": "https://vercel.com",
+      "location": "San Francisco, CA",
+      "id": "comp-vercel-002"
+    },
+    "postedAt": "2026-06-03T14:30:00.000Z",
+    "id": "2"
+  },
+  {
+    "jobTitle": "Data Scientist",
+    "jobDetails": {      
+      "description": "Analyze user listening patterns and build machine learning models to power our recommendation engine.",
+      "location": "Stockholm, Sweden",
+      "salaryRange": "$110K-$150K"
+    },
+    "companyName": "Spotify",
+    "company": {      
+      "logo": "https://github.com/spotify.png",
+      "description": "Audio streaming and media services provider.",
+      "website": "https://spotify.com",
+      "location": "Stockholm, Sweden",
+      "id": "comp-spotify-003"
+    },
+    "postedAt": "2026-06-04T09:15:00.000Z",
+    "id": "3"
+  },
+  {
+    "jobTitle": "Backend Engineer",
+    "jobDetails": {      
+      "description": "Design and build core backend microservices in Java and Kotlin. Scale our booking systems.",
+      "location": "Remote / Seattle, WA",
+      "salaryRange": "$150K-$190K"
+    },
+    "companyName": "Airbnb",
+    "company": {      
+      "logo": "https://github.com/airbnb.png",
+      "description": "An online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities.",
+      "website": "https://airbnb.com",
+      "location": "San Francisco, CA",
+      "id": "comp-airbnb-004"
+    },
+    "postedAt": "2026-06-05T11:45:00.000Z",
+    "id": "4"
+  },
+  {
+    "jobTitle": "Senior DevOps Engineer",
+    "jobDetails": {      
+      "description": "Manage and improve our vast cloud infrastructure. Ensure high availability for millions of concurrent streams.",
+      "location": "Los Gatos, CA",
+      "salaryRange": "$180K-$240K"
+    },
+    "companyName": "Netflix",
+    "company": {      
+      "logo": "https://github.com/netflix.png",
+      "description": "A subscription-based streaming service offering online streaming from a library of films and television series.",
+      "website": "https://netflix.com",
+      "location": "Los Gatos, CA",
+      "id": "comp-netflix-005"
+    },
+    "postedAt": "2026-06-06T08:00:00.000Z",
+    "id": "5"
+  }
+]
