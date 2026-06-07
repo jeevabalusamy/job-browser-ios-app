@@ -6,5 +6,5 @@
 //
 
 protocol JBJobsServiceProtocol {
-    func getJobsListings() async throws -> [JBJobModel]
+    func getJobsListings(searchKeyword: String?) async throws -> [JBJobModel]
 }

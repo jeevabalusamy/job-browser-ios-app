@@ -11,7 +11,7 @@ struct JBJobsListView: View {
     @StateObject private var viewModel = JBJobsListViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
@@ -40,6 +40,16 @@ struct JBJobsListView: View {
                     .padding()
                 } else {
                     List(viewModel.jobs) { job in
+                        // Display "No results" message if search is active and no jobs are found
+                        if viewModel.shouldShowNoResults {
+                            Text("No job listings found for \"\(viewModel.searchQuery)\".")
+                                .foregroundColor(.secondary)
+                                .padding()
+                                .listRowSeparator(.hidden)
+                                .listRowBackground(Color.clear)
+                        }
+                        
+                        // Job cards
                         JobCardView(job: job)
                             .listRowSeparator(.hidden)
                             .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
@@ -47,11 +57,12 @@ struct JBJobsListView: View {
                     }
                     .listStyle(.plain)
                     .refreshable {
-                        await viewModel.fetchJobs()
+                        await viewModel.fetchJobs(searchKeyword: viewModel.searchQuery)
                     }
                 }
             }
             .navigationTitle("Job Listings")
+            .searchable(text: $viewModel.searchQuery, prompt: "Search jobs")
             .task {
                 if viewModel.jobs.isEmpty {
                     await viewModel.fetchJobs()
