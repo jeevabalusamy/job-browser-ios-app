@@ -25,7 +25,7 @@
       "salaryRange": "$130K-$170K"
     },
     "companyName": "Vercel",
-    "company": {      
+    "companyDetails": {      
       "logo": "https://github.com/vercel.png",
       "description": "Vercel is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.",
       "website": "https://vercel.com",
@@ -43,7 +43,7 @@
       "salaryRange": "$110K-$150K"
     },
     "companyName": "Spotify",
-    "company": {      
+    "companyDetails": {      
       "logo": "https://github.com/spotify.png",
       "description": "Audio streaming and media services provider.",
       "website": "https://spotify.com",
@@ -61,7 +61,7 @@
       "salaryRange": "$150K-$190K"
     },
     "companyName": "Airbnb",
-    "company": {      
+    "companyDetails": {      
       "logo": "https://github.com/airbnb.png",
       "description": "An online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities.",
       "website": "https://airbnb.com",
@@ -79,7 +79,7 @@
       "salaryRange": "$180K-$240K"
     },
     "companyName": "Netflix",
-    "company": {      
+    "companyDetails": {      
       "logo": "https://github.com/netflix.png",
       "description": "A subscription-based streaming service offering online streaming from a library of films and television series.",
       "website": "https://netflix.com",

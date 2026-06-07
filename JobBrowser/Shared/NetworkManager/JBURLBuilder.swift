@@ -28,7 +28,7 @@ enum JBEnvironment {
     
     var host: String {
         switch self {
-        case .development: return "d6a2311725c610353286ab01b.mockapi.io"
+        case .development: return "6a2311725c610353286ab01b.mockapi.io"
         case .staging: return "6a2311725c610353286ab01b.mockapi.io"
         case .production: return "6a2311725c610353286ab01b.mockapi.io"
         }

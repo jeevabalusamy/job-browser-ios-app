@@ -11,7 +11,7 @@ import SwiftUI
 struct JobBrowserApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            JBJobsListView()
         }
     }
 }
