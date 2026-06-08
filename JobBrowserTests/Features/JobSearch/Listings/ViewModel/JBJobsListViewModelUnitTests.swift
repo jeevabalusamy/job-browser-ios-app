@@ -68,6 +68,40 @@ struct JBJobsListViewModelUnitTests {
         #expect(viewModel.jobs.first?.jobTitle == "Backend Engineer")
     }
     
+    @Test func testFetchJobsWithEmptySearchKeyword() async throws {
+        let mockService = MockJBJobsService()
+        let viewModel = JBJobsListViewModel(service: mockService)
+        
+        await viewModel.fetchJobs(searchKeyword: "")
+        
+        // Empty keyword should return all jobs
+        #expect(viewModel.jobs.count == 5)
+    }
+
+    @Test func testSearchQueryDebounceRemovesDuplicates() async throws {
+        let mockService = MockJBJobsService()
+        let viewModel = JBJobsListViewModel(service: mockService)
+        
+        viewModel.searchQuery = "Backend"
+        viewModel.searchQuery = "Backend"
+        
+        // Wait for debounce (500ms) + buffer
+        try await Task.sleep(nanoseconds: 600_000_000)
+        
+        #expect(viewModel.jobs.count == 1)
+        #expect(viewModel.jobs.first?.jobTitle == "Backend Engineer")
+    }
+
+    @Test func testFetchJobsWithCaseInsensitiveSearchKeyword() async throws {
+        let mockService = MockJBJobsService()
+        let viewModel = JBJobsListViewModel(service: mockService)
+        
+        await viewModel.fetchJobs(searchKeyword: "fRoNtEnD")
+        
+        #expect(viewModel.jobs.count == 1)
+        #expect(viewModel.jobs.first?.jobTitle == "Frontend Engineer")
+    }
+    
     @Test func testLoadJobsIfNeeded() async throws {
         let mockService = MockJBJobsService()
         let viewModel = JBJobsListViewModel(service: mockService)
