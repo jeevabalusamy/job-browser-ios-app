@@ -19,11 +19,11 @@ final class JBJobCardViewModel: ObservableObject {
     }
     
     var jobTitle: String {
-        job.jobTitle ?? "Unknown Title"
+        job.jobTitle ?? JBLocalization.unknownTitle.value
     }
     
     var companyName: String {
-        job.companyName ?? "Unknown Company"
+        job.companyName ?? JBLocalization.unknownCompany.value
     }
     
     var location: String? {

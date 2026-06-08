@@ -49,7 +49,7 @@ class JBJobsListViewModel: ObservableObject {
             if let networkError = error as? JBNetworkError {
                 self.errorMessage = networkError.localizedDescription
             } else {
-                self.errorMessage = "An unexpected error occurred: \(error.localizedDescription)"
+                self.errorMessage = JBLocalization.unexpectedError.value(args: error.localizedDescription)
             }
             self.jobs = [] // Clear jobs on error
         }

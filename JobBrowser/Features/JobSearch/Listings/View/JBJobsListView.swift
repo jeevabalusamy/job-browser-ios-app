@@ -17,19 +17,19 @@ struct JBJobsListView: View {
                     .ignoresSafeArea()
                 
                 if viewModel.isLoading && viewModel.jobs.isEmpty {
-                    ProgressView("Loading Jobs...")
+                    ProgressView(JBLocalization.loadingJobs.value)
                 } else if let error = viewModel.errorMessage, viewModel.jobs.isEmpty {
                     VStack(spacing: 12) {
                         Image(systemName: "exclamationmark.triangle")
                             .font(.largeTitle)
                             .foregroundColor(.orange)
-                        Text("Failed to load jobs")
+                        Text(JBLocalization.failedLoadJobs.value)
                             .font(.headline)
                         Text(error)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
-                        Button("Retry") {
+                        Button(JBLocalization.retry.value) {
                             Task {
                                 await viewModel.fetchJobs()
                             }
@@ -42,7 +42,7 @@ struct JBJobsListView: View {
                     List(viewModel.jobs) { job in
                         // Display "No results" message if search is active and no jobs are found
                         if viewModel.shouldShowNoResults {
-                            Text("No job listings found for \"\(viewModel.searchQuery)\".")
+                            Text(JBLocalization.noJobListingsFound.value(args: viewModel.searchQuery))
                                 .foregroundColor(.secondary)
                                 .padding()
                                 .listRowSeparator(.hidden)
@@ -67,8 +67,8 @@ struct JBJobsListView: View {
                     }
                 }
             }
-            .navigationTitle("Job Listings")
-            .searchable(text: $viewModel.searchQuery, prompt: "Search jobs")
+            .navigationTitle(JBLocalization.jobListings.value)
+            .searchable(text: $viewModel.searchQuery, prompt: Text(JBLocalization.searchJobs.value))
             .task {
                 if viewModel.jobs.isEmpty {
                     await viewModel.fetchJobs()

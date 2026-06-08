@@ -6,7 +6,6 @@
 import Combine
 import Foundation
 
-@MainActor
 final class JBJobDetailsViewModel: ObservableObject {
     @Published var job: JBJobModel?
     @Published var isLoading = false
@@ -21,11 +20,11 @@ final class JBJobDetailsViewModel: ObservableObject {
     }
     
     var jobTitle: String {
-        job?.jobTitle ?? "Unknown Title"
+        job?.jobTitle ?? JBLocalization.unknownTitle.value
     }
     
     var companyName: String {
-        job?.companyName ?? "Unknown Company"
+        job?.companyName ?? JBLocalization.unknownCompany.value
     }
     
     var location: String? {
@@ -54,6 +53,7 @@ final class JBJobDetailsViewModel: ObservableObject {
         return URL(string: website)
     }
     
+    @MainActor
     func fetchJobDetails() async {
         isLoading = true
         errorMessage = nil

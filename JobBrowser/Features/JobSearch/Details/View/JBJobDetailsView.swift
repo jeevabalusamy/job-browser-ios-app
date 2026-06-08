@@ -137,7 +137,7 @@ struct JBJobDetailsView: View {
     private var aboutJobView: some View {
         if let description = viewModel.jobDescription {
             VStack(alignment: .leading, spacing: 12) {
-                Text("About this job")
+                Text(JBLocalization.aboutThisJob.value)
                     .font(.headline)
                     .foregroundColor(.primary)
                 
@@ -156,7 +156,7 @@ struct JBJobDetailsView: View {
     private var companyInfoView: some View {
         if viewModel.companyDescription != nil || viewModel.companyWebsiteURL != nil {
             VStack(alignment: .leading, spacing: 12) {
-                Text("Company Information")
+                Text(JBLocalization.companyInformation.value)
                     .font(.headline)
                     .foregroundColor(.primary)
                 
@@ -170,7 +170,7 @@ struct JBJobDetailsView: View {
                 if let websiteURL = viewModel.companyWebsiteURL {
                     Link(destination: websiteURL) {
                         HStack {
-                            Text("Visit Website")
+                            Text(JBLocalization.visitWebsite.value)
                             Image(systemName: "arrow.up.right.square")
                         }
                         .font(.subheadline)
