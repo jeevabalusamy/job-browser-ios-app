@@ -93,7 +93,7 @@ struct JBJobDetailsView: View {
     }
     
     private var placeholderLogo: some View {
-        Image(systemName: "building.2.crop.circle")
+        Image(systemName: JBSystemImage.building.rawValue)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 90, height: 90)
@@ -106,7 +106,7 @@ struct JBJobDetailsView: View {
             VStack(alignment: .leading, spacing: 12) {
                 if let location = viewModel.location {
                     HStack(spacing: 12) {
-                        Image(systemName: "mappin.and.ellipse")
+                        Image(systemName: JBSystemImage.location.name)
                             .foregroundColor(.gray)
                             .frame(width: 20)
                         Text(location)
@@ -117,7 +117,7 @@ struct JBJobDetailsView: View {
                 
                 if let salary = viewModel.salaryRange {
                     HStack(spacing: 12) {
-                        Image(systemName: "banknote")
+                        Image(systemName: JBSystemImage.salary.rawValue)
                             .foregroundColor(.green)
                             .frame(width: 20)
                         Text(salary)
@@ -171,7 +171,7 @@ struct JBJobDetailsView: View {
                     Link(destination: websiteURL) {
                         HStack {
                             Text(JBLocalization.visitWebsite.value)
-                            Image(systemName: "arrow.up.right.square")
+                            Image(systemName: JBSystemImage.externalLink.name)
                         }
                         .font(.subheadline)
                         .foregroundColor(.blue)

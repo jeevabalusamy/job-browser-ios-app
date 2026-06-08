@@ -20,7 +20,7 @@ struct JBJobsListView: View {
                     ProgressView(JBLocalization.loadingJobs.value)
                 } else if let error = viewModel.errorMessage, viewModel.jobs.isEmpty {
                     VStack(spacing: 12) {
-                        Image(systemName: "exclamationmark.triangle")
+                        Image(systemName: JBSystemImage.warning.name)
                             .font(.largeTitle)
                             .foregroundColor(.orange)
                         Text(JBLocalization.failedLoadJobs.value)

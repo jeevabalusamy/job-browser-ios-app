@@ -31,7 +31,7 @@ struct JBJobCardView: View {
                 
                 HStack(spacing: 4) {
                     if let location = viewModel.location {
-                        Image(systemName: "mappin.and.ellipse")
+                        Image(systemName: JBSystemImage.location.name)
                             .font(.caption2)
                             .foregroundColor(.gray)
                         Text(location)
@@ -43,7 +43,7 @@ struct JBJobCardView: View {
                 
                 if let salary = viewModel.salaryRange {
                     HStack(spacing: 4) {
-                        Image(systemName: "banknote")
+                        Image(systemName: JBSystemImage.salary.name)
                             .font(.caption2)
                             .foregroundColor(.green)
                         Text(salary)
@@ -91,7 +91,7 @@ struct JBJobCardView: View {
     }
     
     private var placeholderLogo: some View {
-        Image(systemName: "building.2.crop.circle")
+        Image(systemName: JBSystemImage.building.name)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 50, height: 50)
