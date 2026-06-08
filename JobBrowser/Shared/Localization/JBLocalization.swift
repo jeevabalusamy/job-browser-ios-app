@@ -28,13 +28,6 @@ enum JBLocalization: String {
     var value: String {
         NSLocalizedString(rawValue, tableName: "Localizable", bundle: .main, value: rawValue, comment: "")
     }
-
-    func value(count: Int) -> String {
-        String.localizedStringWithFormat(
-            NSLocalizedString(rawValue, tableName: "Localizable", bundle: .main, value: rawValue, comment: ""),
-            count
-        )
-    }
     
     func value(args: CVarArg...) -> String {
         String(format: NSLocalizedString(rawValue, tableName: "Localizable", bundle: .main, value: rawValue, comment: ""), arguments: args)
