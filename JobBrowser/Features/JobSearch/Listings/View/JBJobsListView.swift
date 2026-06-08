@@ -51,6 +51,12 @@ struct JBJobsListView: View {
                         
                         // Job cards
                         JobCardView(job: job)
+                            .background(
+                                NavigationLink(destination: JBJobDetailsView(jobId: job.id)) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
+                            )
                             .listRowSeparator(.hidden)
                             .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                             .listRowBackground(Color.clear)

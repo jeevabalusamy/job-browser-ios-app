@@ -29,4 +29,13 @@ struct JBJobsService: JBJobsServiceProtocol {
         
         return try await networkManager.fetch(from: url)
     }
+    
+    func getJobDetails(id: String) async throws -> JBJobModel {
+        let urlBuilder = JBURLBuilder()
+            .set(path: "\(Path.jobs.rawValue)/\(id)")
+        
+        let url = try urlBuilder.build()
+        
+        return try await networkManager.fetch(from: url)
+    }
 }
