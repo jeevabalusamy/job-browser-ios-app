@@ -43,4 +43,7 @@ The application follows the **MVVM** architecture pattern to ensure separation o
 - **Localization**: English is implemented as the base language, with Apple's modern String Catalogs (`.xcstrings`) set up to facilitate seamless future localization expansions.
 
 ## Known Issue
-- **No Search Results State Message**: MockAPI returns a 404 error instead of an empty set when no search results are found.
+- **No Search Results State Message**: MockAPI returns a 404 error instead of an empty set when no search results are found. So app will display it 404 error instead of no results found.
+
+## Demo
+<video src="https://github.com/user-attachments/assets/fb0e69c1-6605-471a-a008-306dff342b24" width="600" controls></video>
