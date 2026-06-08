@@ -44,28 +44,32 @@ struct JBJobCardView: View {
                     .foregroundColor(.secondary)
                     .lineLimit(LayoutConstants.defaultLineLimit)
                 
-                HStack(spacing: LayoutConstants.iconSpacing) {
-                    if let location = viewModel.location {
+                if viewModel.hasLocation {
+                    HStack(spacing: LayoutConstants.iconSpacing) {
                         Image(systemName: JBSystemImage.location.name)
                             .font(.caption2)
                             .foregroundColor(.gray)
-                        Text(location)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .lineLimit(LayoutConstants.defaultLineLimit)
+                        if let location = viewModel.location {
+                            Text(location)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .lineLimit(LayoutConstants.defaultLineLimit)
+                        }
                     }
                 }
                 
-                if let salary = viewModel.salaryRange {
+                if viewModel.hasSalaryRange {
                     HStack(spacing: LayoutConstants.iconSpacing) {
                         Image(systemName: JBSystemImage.salary.name)
                             .font(.caption2)
                             .foregroundColor(.green)
-                        Text(salary)
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .foregroundColor(.green)
-                            .lineLimit(LayoutConstants.defaultLineLimit)
+                        if let salary = viewModel.salaryRange {
+                            Text(salary)
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundColor(.green)
+                                .lineLimit(LayoutConstants.defaultLineLimit)
+                        }
                     }
                 }
             }
@@ -82,7 +86,7 @@ struct JBJobCardView: View {
     
     @ViewBuilder
     private var logoView: some View {
-        if let url = viewModel.companyLogoURL {
+        if viewModel.hasCompanyLogo, let url = viewModel.companyLogoURL {
             CachedAsyncImage(url: url) { phase in
                 switch phase {
                 case .empty:

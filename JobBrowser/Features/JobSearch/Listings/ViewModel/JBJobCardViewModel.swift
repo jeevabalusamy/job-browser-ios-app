@@ -38,4 +38,16 @@ final class JBJobCardViewModel: ObservableObject {
         guard let logoString = job.companyDetails?.logo else { return nil }
         return URL(string: logoString)
     }
+    
+    var hasLocation: Bool {
+        return location != nil
+    }
+    
+    var hasSalaryRange: Bool {
+        return salaryRange != nil
+    }
+    
+    var hasCompanyLogo: Bool {
+        return companyLogoURL != nil
+    }
 }

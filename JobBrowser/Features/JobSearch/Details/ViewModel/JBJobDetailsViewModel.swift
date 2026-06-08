@@ -9,7 +9,12 @@ import Foundation
 final class JBJobDetailsViewModel: ObservableObject {
     @Published var job: JBJobModel?
     @Published var isLoading = false
-    @Published var errorMessage: String?
+    @Published var showError = false
+    @Published var errorMessage: String? {
+        didSet {
+            showError = errorMessage != nil
+        }
+    }
     
     private let jobsService: JBJobsServiceProtocol
     private let jobId: String
@@ -51,6 +56,22 @@ final class JBJobDetailsViewModel: ObservableObject {
     var companyWebsiteURL: URL? {
         guard let website = job?.companyDetails?.website else { return nil }
         return URL(string: website)
+    }
+    
+    var hasQuickInfo: Bool {
+        return location != nil || salaryRange != nil
+    }
+    
+    var hasCompanyInfo: Bool {
+        return companyDescription != nil || companyWebsiteURL != nil
+    }
+    
+    var hasAboutJob: Bool {
+        return jobDescription != nil
+    }
+    
+    var hasCompanyLogo: Bool {
+        return companyLogoURL != nil
     }
     
     @MainActor

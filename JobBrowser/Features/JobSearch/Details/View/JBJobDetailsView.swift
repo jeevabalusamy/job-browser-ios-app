@@ -57,10 +57,7 @@ struct JBJobDetailsView: View {
         .task {
             await viewModel.fetchJobDetails()
         }
-        .alert(JBLocalization.failedLoadDetails.value, isPresented: Binding(
-            get: { viewModel.errorMessage != nil },
-            set: { _ in viewModel.errorMessage = nil }
-        )) {
+        .alert(JBLocalization.failedLoadDetails.value, isPresented: $viewModel.showError) {
             Button(JBLocalization.ok.value, role: .cancel) { }
         } message: {
             if let errorMessage = viewModel.errorMessage {
@@ -73,7 +70,7 @@ struct JBJobDetailsView: View {
     
     private var headerView: some View {
         VStack(spacing: LayoutConstants.headerVStackSpacing) {
-            if let url = viewModel.companyLogoURL {
+            if viewModel.hasCompanyLogo, let url = viewModel.companyLogoURL {
                 CachedAsyncImage(url: url) { phase in
                     switch phase {
                     case .empty:
@@ -122,7 +119,7 @@ struct JBJobDetailsView: View {
     
     @ViewBuilder
     private var quickInfoView: some View {
-        if viewModel.location != nil || viewModel.salaryRange != nil {
+        if viewModel.hasQuickInfo {
             VStack(alignment: .leading, spacing: LayoutConstants.infoVStackSpacing) {
                 if let location = viewModel.location {
                     HStack(spacing: LayoutConstants.infoHStackSpacing) {
@@ -155,16 +152,18 @@ struct JBJobDetailsView: View {
     
     @ViewBuilder
     private var aboutJobView: some View {
-        if let description = viewModel.jobDescription {
+        if viewModel.hasAboutJob {
             VStack(alignment: .leading, spacing: LayoutConstants.infoVStackSpacing) {
                 Text(JBLocalization.aboutThisJob.value)
                     .font(.headline)
                     .foregroundColor(.primary)
                 
-                Text(description)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                if let description = viewModel.jobDescription {
+                    Text(description)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -174,7 +173,7 @@ struct JBJobDetailsView: View {
     
     @ViewBuilder
     private var companyInfoView: some View {
-        if viewModel.companyDescription != nil || viewModel.companyWebsiteURL != nil {
+        if viewModel.hasCompanyInfo {
             VStack(alignment: .leading, spacing: LayoutConstants.infoVStackSpacing) {
                 Text(JBLocalization.companyInformation.value)
                     .font(.headline)
