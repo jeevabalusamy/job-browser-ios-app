@@ -12,19 +12,25 @@ class MockJBJobsService: JBJobsServiceProtocol {
     var shouldReturnError = false
     var customError: Error?
     
+    private var jsonURL: URL {
+        let currentFileURL = URL(fileURLWithPath: #file)
+        let directoryURL = currentFileURL.deletingLastPathComponent()
+        return directoryURL.appendingPathComponent("job-listings.json")
+    }
+    
+    private func getJobsListFromJson() throws -> [JBJobModel] {
+        let data = try Data(contentsOf: jsonURL)
+        let decoder = JSONDecoder()
+        let jobs = try decoder.decode([JBJobModel].self, from: data)
+        return jobs
+    }
+    
     func getJobsListings(searchKeyword: String?) async throws -> [JBJobModel] {
         if shouldReturnError {
             throw customError ?? URLError(.badServerResponse)
         }
         
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: "job-listings", withExtension: "json") else {
-            fatalError("Failed to locate job-listings.json in bundle.")
-        }
-        
-        let data = try Data(contentsOf: url)
-        let decoder = JSONDecoder()
-        let jobs = try decoder.decode([JBJobModel].self, from: data)
+        let jobs = try getJobsListFromJson()
         
         if let keyword = searchKeyword, !keyword.isEmpty {
             return jobs.filter { job in
@@ -42,14 +48,7 @@ class MockJBJobsService: JBJobsServiceProtocol {
             throw customError ?? URLError(.badServerResponse)
         }
         
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: "job-listings", withExtension: "json") else {
-            fatalError("Failed to locate job-listings.json in bundle.")
-        }
-        
-        let data = try Data(contentsOf: url)
-        let decoder = JSONDecoder()
-        let jobs = try decoder.decode([JBJobModel].self, from: data)
+        let jobs = try getJobsListFromJson()
         
         guard let job = jobs.first(where: { $0.id == id }) else {
             throw URLError(.resourceUnavailable)
