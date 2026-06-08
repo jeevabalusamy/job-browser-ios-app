@@ -24,18 +24,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1339526F2FD6B4360068E30E /* JobBrowserTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = JobBrowserTests.xctestplan; path = JobBrowserTests/JobBrowserTests.xctestplan; sourceTree = "<group>"; };
 		13F282882FD3EB66008A3959 /* JobBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13F282952FD3EB68008A3959 /* JobBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		13F282952FD3EB68008A3959 /* JobBrowserUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobBrowserUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F2829F2FD3EB68008A3959 /* JobBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		133952512FD696440068E30E /* Exceptions for "JobBrowser" folder in "JobBrowserTests" target */ = {
+		133952512FD696440068E30E /* Exceptions for "JobBrowser" folder in "JobBrowserUnitTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resources/Localizable.xcstrings,
 			);
-			target = 13F282942FD3EB68008A3959 /* JobBrowserTests */;
+			target = 13F282942FD3EB68008A3959 /* JobBrowserUnitTests */;
 		};
 		13E6C7A22FD5FF44004139BE /* Exceptions for "JobBrowser" folder in "JobBrowser" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -51,7 +52,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				13E6C7A22FD5FF44004139BE /* Exceptions for "JobBrowser" folder in "JobBrowser" target */,
-				133952512FD696440068E30E /* Exceptions for "JobBrowser" folder in "JobBrowserTests" target */,
+				133952512FD696440068E30E /* Exceptions for "JobBrowser" folder in "JobBrowserUnitTests" target */,
 			);
 			path = JobBrowser;
 			sourceTree = "<group>";
@@ -96,6 +97,7 @@
 		13F2827F2FD3EB66008A3959 = {
 			isa = PBXGroup;
 			children = (
+				1339526F2FD6B4360068E30E /* JobBrowserTests.xctestplan */,
 				13F2828A2FD3EB66008A3959 /* JobBrowser */,
 				13F282982FD3EB68008A3959 /* JobBrowserTests */,
 				13F282A22FD3EB68008A3959 /* JobBrowserUITests */,
@@ -107,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				13F282882FD3EB66008A3959 /* JobBrowser.app */,
-				13F282952FD3EB68008A3959 /* JobBrowserTests.xctest */,
+				13F282952FD3EB68008A3959 /* JobBrowserUnitTests.xctest */,
 				13F2829F2FD3EB68008A3959 /* JobBrowserUITests.xctest */,
 			);
 			name = Products;
@@ -138,9 +140,9 @@
 			productReference = 13F282882FD3EB66008A3959 /* JobBrowser.app */;
 			productType = "com.apple.product-type.application";
 		};
-		13F282942FD3EB68008A3959 /* JobBrowserTests */ = {
+		13F282942FD3EB68008A3959 /* JobBrowserUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13F282AC2FD3EB68008A3959 /* Build configuration list for PBXNativeTarget "JobBrowserTests" */;
+			buildConfigurationList = 13F282AC2FD3EB68008A3959 /* Build configuration list for PBXNativeTarget "JobBrowserUnitTests" */;
 			buildPhases = (
 				13F282912FD3EB68008A3959 /* Sources */,
 				13F282922FD3EB68008A3959 /* Frameworks */,
@@ -154,11 +156,11 @@
 			fileSystemSynchronizedGroups = (
 				13F282982FD3EB68008A3959 /* JobBrowserTests */,
 			);
-			name = JobBrowserTests;
+			name = JobBrowserUnitTests;
 			packageProductDependencies = (
 			);
 			productName = JobBrowserTests;
-			productReference = 13F282952FD3EB68008A3959 /* JobBrowserTests.xctest */;
+			productReference = 13F282952FD3EB68008A3959 /* JobBrowserUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		13F2829E2FD3EB68008A3959 /* JobBrowserUITests */ = {
@@ -222,7 +224,7 @@
 			projectRoot = "";
 			targets = (
 				13F282872FD3EB66008A3959 /* JobBrowser */,
-				13F282942FD3EB68008A3959 /* JobBrowserTests */,
+				13F282942FD3EB68008A3959 /* JobBrowserUnitTests */,
 				13F2829E2FD3EB68008A3959 /* JobBrowserUITests */,
 			);
 		};
@@ -576,7 +578,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13F282AC2FD3EB68008A3959 /* Build configuration list for PBXNativeTarget "JobBrowserTests" */ = {
+		13F282AC2FD3EB68008A3959 /* Build configuration list for PBXNativeTarget "JobBrowserUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13F282AD2FD3EB68008A3959 /* Debug */,

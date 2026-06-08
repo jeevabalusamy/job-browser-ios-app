@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "A64C9B46-C467-4DA7-991E-F9BF3A89D065",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:JobBrowser.xcodeproj",
+      "identifier" : "13F282872FD3EB66008A3959",
+      "name" : "JobBrowser"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:JobBrowser.xcodeproj",
+        "identifier" : "13F282942FD3EB68008A3959",
+        "name" : "JobBrowserTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:JobBrowser.xcodeproj",
+        "identifier" : "13F2829E2FD3EB68008A3959",
+        "name" : "JobBrowserUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

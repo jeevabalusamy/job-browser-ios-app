@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "6FF6AB9A-982E-4AC0-AB54-BA5964AF29B2",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:JobBrowser.xcodeproj",
+        "identifier" : "13F282942FD3EB68008A3959",
+        "name" : "JobBrowserUnitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
