@@ -16,16 +16,16 @@ struct JBJobsListView: View {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
                 
-                if viewModel.isLoading && viewModel.jobs.isEmpty {
+                if viewModel.isInitialLoading {
                     ProgressView(JBLocalization.loadingJobs.value)
-                } else if let error = viewModel.errorMessage, viewModel.jobs.isEmpty {
+                } else if viewModel.showError {
                     VStack(spacing: 12) {
                         Image(systemName: JBSystemImage.warning.name)
                             .font(.largeTitle)
                             .foregroundColor(.orange)
                         Text(JBLocalization.failedLoadJobs.value)
                             .font(.headline)
-                        Text(error)
+                        Text(viewModel.errorMessage ?? "")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -39,40 +39,40 @@ struct JBJobsListView: View {
                     }
                     .padding()
                 } else {
-                    List(viewModel.jobs) { job in
+                    List {
                         // Display "No results" message if search is active and no jobs are found
                         if viewModel.shouldShowNoResults {
-                            Text(JBLocalization.noJobListingsFound.value(args: viewModel.searchQuery))
+                            Text(viewModel.noResultsMessage)
                                 .foregroundColor(.secondary)
                                 .padding()
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
                         }
                         
-                        // Job cards
-                        JBJobCardView(job: job)
-                            .background(
-                                NavigationLink(destination: JBJobDetailsView(jobId: job.id)) {
-                                    EmptyView()
-                                }
-                                .opacity(0)
-                            )
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                            .listRowBackground(Color.clear)
+                        ForEach(viewModel.jobs) { job in
+                            // Job cards
+                            JBJobCardView(job: job)
+                                .background(
+                                    NavigationLink(destination: JBJobDetailsView(jobId: job.id)) {
+                                        EmptyView()
+                                    }
+                                    .opacity(0)
+                                )
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                                .listRowBackground(Color.clear)
+                        }
                     }
                     .listStyle(.plain)
                     .refreshable {
-                        await viewModel.fetchJobs(searchKeyword: viewModel.searchQuery)
+                        await viewModel.refreshJobs()
                     }
                 }
             }
             .navigationTitle(JBLocalization.jobListings.value)
             .searchable(text: $viewModel.searchQuery, prompt: Text(JBLocalization.searchJobs.value))
             .task {
-                if viewModel.jobs.isEmpty {
-                    await viewModel.fetchJobs()
-                }
+                await viewModel.loadJobsIfNeeded()
             }
         }
     }

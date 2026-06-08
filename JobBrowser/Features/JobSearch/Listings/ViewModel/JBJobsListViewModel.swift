@@ -60,4 +60,33 @@ class JBJobsListViewModel: ObservableObject {
     var shouldShowNoResults: Bool {
         !isLoading && jobs.isEmpty && !searchQuery.isEmpty && errorMessage == nil
     }
+    
+    /// Checks if initial loading state should be displayed.
+    var isInitialLoading: Bool {
+        isLoading && jobs.isEmpty
+    }
+    
+    /// Checks if error state should be displayed.
+    var showError: Bool {
+        errorMessage != nil && jobs.isEmpty
+    }
+    
+    /// Returns the localized "no results" message.
+    var noResultsMessage: String {
+        JBLocalization.noJobListingsFound.value(args: searchQuery)
+    }
+    
+    /// Fetches initial jobs if the list is empty.
+    @MainActor
+    func loadJobsIfNeeded() async {
+        if jobs.isEmpty {
+            await fetchJobs()
+        }
+    }
+    
+    /// Refreshes jobs using the current search query.
+    @MainActor
+    func refreshJobs() async {
+        await fetchJobs(searchKeyword: searchQuery)
+    }
 }

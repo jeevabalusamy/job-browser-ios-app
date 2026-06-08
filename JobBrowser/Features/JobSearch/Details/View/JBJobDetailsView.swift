@@ -37,11 +37,11 @@ struct JBJobDetailsView: View {
         .task {
             await viewModel.fetchJobDetails()
         }
-        .alert("Failed to load details", isPresented: Binding(
+        .alert(JBLocalization.failedLoadDetails.value, isPresented: Binding(
             get: { viewModel.errorMessage != nil },
             set: { _ in viewModel.errorMessage = nil }
         )) {
-            Button("OK", role: .cancel) { }
+            Button(JBLocalization.ok.value, role: .cancel) { }
         } message: {
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
