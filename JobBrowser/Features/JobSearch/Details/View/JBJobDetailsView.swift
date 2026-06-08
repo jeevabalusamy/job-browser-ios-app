@@ -8,6 +8,26 @@ import SwiftUI
 struct JBJobDetailsView: View {
     @StateObject private var viewModel: JBJobDetailsViewModel
     
+    private struct LayoutConstants {
+        static let vStackSpacing: CGFloat = 20
+        static let progressViewCornerRadius: CGFloat = 8
+        static let progressViewOpacity: Double = 0.8
+        static let headerVStackSpacing: CGFloat = 16
+        static let headerTopPadding: CGFloat = 10
+        static let headerVStackInnerSpacing: CGFloat = 6
+        static let logoSize: CGFloat = 90
+        static let logoCornerRadius: CGFloat = 16
+        static let shadowRadius: CGFloat = 5
+        static let shadowY: CGFloat = 2
+        static let shadowOpacity: Double = 0.08
+        static let cardShadowOpacity: Double = 0.05
+        static let infoVStackSpacing: CGFloat = 12
+        static let infoHStackSpacing: CGFloat = 12
+        static let iconWidth: CGFloat = 20
+        static let websiteLinkTopPadding: CGFloat = 4
+        static let cardCornerRadius: CGFloat = 12
+    }
+    
     init(jobId: String) {
         _viewModel = StateObject(wrappedValue: JBJobDetailsViewModel(jobId: jobId))
     }
@@ -17,7 +37,7 @@ struct JBJobDetailsView: View {
             Color(.systemGroupedBackground).ignoresSafeArea()
             
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: LayoutConstants.vStackSpacing) {
                     headerView
                     quickInfoView
                     aboutJobView
@@ -29,8 +49,8 @@ struct JBJobDetailsView: View {
             if viewModel.isLoading {
                 ProgressView()
                     .padding()
-                    .background(Color(.systemBackground).opacity(0.8))
-                    .cornerRadius(8)
+                    .background(Color(.systemBackground).opacity(LayoutConstants.progressViewOpacity))
+                    .cornerRadius(LayoutConstants.progressViewCornerRadius)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -52,20 +72,20 @@ struct JBJobDetailsView: View {
     // MARK: - Subviews
     
     private var headerView: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: LayoutConstants.headerVStackSpacing) {
             if let url = viewModel.companyLogoURL {
                 CachedAsyncImage(url: url) { phase in
                     switch phase {
                     case .empty:
                         ProgressView()
-                            .frame(width: 90, height: 90)
+                            .frame(width: LayoutConstants.logoSize, height: LayoutConstants.logoSize)
                     case .success(let image):
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 90, height: 90)
-                            .cornerRadius(16)
-                            .shadow(color: Color.black.opacity(0.08), radius: 5, x: 0, y: 2)
+                            .frame(width: LayoutConstants.logoSize, height: LayoutConstants.logoSize)
+                            .cornerRadius(LayoutConstants.logoCornerRadius)
+                            .shadow(color: Color.black.opacity(LayoutConstants.shadowOpacity), radius: LayoutConstants.shadowRadius, x: 0, y: LayoutConstants.shadowY)
                     case .failure:
                         placeholderLogo
                     @unknown default:
@@ -76,7 +96,7 @@ struct JBJobDetailsView: View {
                 placeholderLogo
             }
             
-            VStack(spacing: 6) {
+            VStack(spacing: LayoutConstants.headerVStackInnerSpacing) {
                 Text(viewModel.jobTitle)
                     .font(.title2)
                     .fontWeight(.bold)
@@ -88,7 +108,7 @@ struct JBJobDetailsView: View {
                     .foregroundColor(.secondary)
             }
         }
-        .padding(.top, 10)
+        .padding(.top, LayoutConstants.headerTopPadding)
         .frame(maxWidth: .infinity)
     }
     
@@ -96,19 +116,19 @@ struct JBJobDetailsView: View {
         Image(systemName: JBSystemImage.building.rawValue)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 90, height: 90)
+            .frame(width: LayoutConstants.logoSize, height: LayoutConstants.logoSize)
             .foregroundColor(.gray)
     }
     
     @ViewBuilder
     private var quickInfoView: some View {
         if viewModel.location != nil || viewModel.salaryRange != nil {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: LayoutConstants.infoVStackSpacing) {
                 if let location = viewModel.location {
-                    HStack(spacing: 12) {
+                    HStack(spacing: LayoutConstants.infoHStackSpacing) {
                         Image(systemName: JBSystemImage.location.name)
                             .foregroundColor(.gray)
-                            .frame(width: 20)
+                            .frame(width: LayoutConstants.iconWidth)
                         Text(location)
                             .font(.subheadline)
                             .foregroundColor(.primary)
@@ -116,10 +136,10 @@ struct JBJobDetailsView: View {
                 }
                 
                 if let salary = viewModel.salaryRange {
-                    HStack(spacing: 12) {
+                    HStack(spacing: LayoutConstants.infoHStackSpacing) {
                         Image(systemName: JBSystemImage.salary.rawValue)
                             .foregroundColor(.green)
-                            .frame(width: 20)
+                            .frame(width: LayoutConstants.iconWidth)
                         Text(salary)
                             .font(.subheadline)
                             .fontWeight(.medium)
@@ -136,7 +156,7 @@ struct JBJobDetailsView: View {
     @ViewBuilder
     private var aboutJobView: some View {
         if let description = viewModel.jobDescription {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: LayoutConstants.infoVStackSpacing) {
                 Text(JBLocalization.aboutThisJob.value)
                     .font(.headline)
                     .foregroundColor(.primary)
@@ -155,7 +175,7 @@ struct JBJobDetailsView: View {
     @ViewBuilder
     private var companyInfoView: some View {
         if viewModel.companyDescription != nil || viewModel.companyWebsiteURL != nil {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: LayoutConstants.infoVStackSpacing) {
                 Text(JBLocalization.companyInformation.value)
                     .font(.headline)
                     .foregroundColor(.primary)
@@ -176,7 +196,7 @@ struct JBJobDetailsView: View {
                         .font(.subheadline)
                         .foregroundColor(.blue)
                     }
-                    .padding(.top, 4)
+                    .padding(.top, LayoutConstants.websiteLinkTopPadding)
                 }
             }
             .padding()
@@ -186,9 +206,9 @@ struct JBJobDetailsView: View {
     }
     
     private var cardBackground: some View {
-        RoundedRectangle(cornerRadius: 12)
+        RoundedRectangle(cornerRadius: LayoutConstants.cardCornerRadius)
             .fill(Color(.systemBackground))
-            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(LayoutConstants.cardShadowOpacity), radius: LayoutConstants.shadowRadius, x: 0, y: LayoutConstants.shadowY)
     }
 }
 

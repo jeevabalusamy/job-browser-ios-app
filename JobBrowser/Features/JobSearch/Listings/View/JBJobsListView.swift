@@ -10,6 +10,13 @@ import SwiftUI
 struct JBJobsListView: View {
     @StateObject private var viewModel = JBJobsListViewModel()
     
+    private struct LayoutConstants {
+        static let errorVStackSpacing: CGFloat = 12
+        static let retryButtonTopPadding: CGFloat = 8
+        static let listRowInsets = EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        static let navigationLinkOpacity: Double = 0
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -19,7 +26,7 @@ struct JBJobsListView: View {
                 if viewModel.isInitialLoading {
                     ProgressView(JBLocalization.loadingJobs.value)
                 } else if viewModel.showError {
-                    VStack(spacing: 12) {
+                    VStack(spacing: LayoutConstants.errorVStackSpacing) {
                         Image(systemName: JBSystemImage.warning.name)
                             .font(.largeTitle)
                             .foregroundColor(.orange)
@@ -35,7 +42,7 @@ struct JBJobsListView: View {
                             }
                         }
                         .buttonStyle(.borderedProminent)
-                        .padding(.top, 8)
+                        .padding(.top, LayoutConstants.retryButtonTopPadding)
                     }
                     .padding()
                 } else {
@@ -56,10 +63,10 @@ struct JBJobsListView: View {
                                     NavigationLink(destination: JBJobDetailsView(jobId: job.id)) {
                                         EmptyView()
                                     }
-                                    .opacity(0)
+                                    .opacity(LayoutConstants.navigationLinkOpacity)
                                 )
                                 .listRowSeparator(.hidden)
-                                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                                .listRowInsets(LayoutConstants.listRowInsets)
                                 .listRowBackground(Color.clear)
                         }
                     }
