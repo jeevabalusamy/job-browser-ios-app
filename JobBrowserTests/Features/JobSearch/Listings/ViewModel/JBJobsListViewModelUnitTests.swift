@@ -1,0 +1,16 @@
+//
+//  JBJobsListViewModelUnitTests.swift
+//  JobBrowserTests
+//
+//  Created by Jeeva Balusamy on 08/06/26.
+//
+
+import Testing
+
+struct JBJobsListViewModelUnitTests {
+
+    @Test func <#test function name#>() async throws {
+        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    }
+
+}
